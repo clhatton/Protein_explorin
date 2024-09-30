@@ -1,0 +1,14 @@
+<ROSETTASCRIPTS>
+  <SCOREFXNS>
+    <ScoreFunction name="ref2015" weights="ref2015" />
+  </SCOREFXNS>
+  <MOVERS>
+    <DockingProtocol name="dock_prot" >
+      <LowRes name="lowres" scorefxn="ref2015" />
+      <HighRes name="highres" scorefxn="ref2015" />
+    </DockingProtocol>
+  </MOVERS>
+  <PROTOCOLS>
+    <Add mover="dock_prot" />
+  </PROTOCOLS>
+</ROSETTASCRIPTS>

@@ -3,9 +3,17 @@
     <ScoreFunction name="ref2015" weights="ref2015" />
   </SCOREFXNS>
   <MOVERS>
-    <DockingProtocol name="dock_prot" />  
+    <DockingProtocol name="dock_prot">
+      <options>
+        <nstruct value="100" />  <!-- Number of docking structures to generate -->
+        <exhaustiveness value="1" />  <!-- Exhaustiveness of the docking search -->
+      </options>
+    </DockingProtocol>
   </MOVERS>
   <PROTOCOLS>
     <Add mover="dock_prot" />
   </PROTOCOLS>
+  <OUTPUT>
+    <pdb filename="docked_output.pdb" />  <!-- Specify output PDB filename -->
+  </OUTPUT>
 </ROSETTASCRIPTS>

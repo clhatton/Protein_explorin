@@ -3,7 +3,7 @@
     <ScoreFunction name="ref2015" weights="ref2015" />
   </SCOREFXNS>
   <MOVERS>
-    <DockingProtocol name="dock_prot" scorefxn="ref2015" />  
+    <DockingProtocol name="dock_prot" />  
   </MOVERS>
   <PROTOCOLS>
     <Add mover="dock_prot" />

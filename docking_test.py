@@ -20,7 +20,7 @@ rule download_alphafold_pdb:
 
 rule run_rosetta_docking:
     input:
-        "c_term_tail.pdb" ,
+        "alpha_synuclein.pdb" ,
         "pdb/{uniprot_id}.pdb"
     output:
         "output/{uniprot_id}_docked.pdb"

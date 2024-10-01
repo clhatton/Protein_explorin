@@ -30,6 +30,8 @@ rule run_rosetta_docking:
         """
         /zata/zippy/hattonc/rosetta/source/bin/docking_protocol.default.linuxgccrelease -s {input[0]} -s {input[1]} \
         -nstruct 10 \
+        -relax:constrain_relax_to_start_coords \
+        -relax:coord_constrain_sidechains \
         -out:path:all output/ \
         -ex1 -ex2aro \
         -use_input_sc 

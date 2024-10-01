@@ -9,8 +9,6 @@ rule all:
         expand("output/{uniprot_id}_docked.pdb", uniprot_id=uniprot_ids)
 
 rule download_alphafold_pdb:
-    input:
-        "pdb/{uniprot_id}.pdb"
     output:
         "pdb/{uniprot_id}.pdb"
     params:

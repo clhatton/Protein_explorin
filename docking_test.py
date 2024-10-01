@@ -29,7 +29,6 @@ rule run_rosetta_docking:
     shell:
         """
         /zata/zippy/hattonc/rosetta/source/bin/docking_protocol.default.linuxgccrelease -s {input[0]} -s {input[1]} \
-        -parser:protocol docking_protocol.xml \
         -nstruct 10 \
         -out:path:all output/
         """

@@ -29,11 +29,11 @@ rule run_rosetta_docking:
     shell:
         """
         /zata/zippy/hattonc/rosetta/source/bin/docking_protocol.default.linuxgccrelease -s {input[0]} -s {input[1]} \
-        -nstruct 10 \
+        -nstruct 10 -ex1 -ex2aro \
         -relax:constrain_relax_to_start_coords \
         -relax:coord_constrain_sidechains \
         -out:path:all output/ \
-        -ex1 -ex2aro \
+        -randomize1 -randomize2 \
         -use_input_sc 
         """
 rule cleanup_pdb: 

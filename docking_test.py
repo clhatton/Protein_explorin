@@ -18,26 +18,41 @@ rule download_alphafold_pdb:
         curl -L -o {output} https://alphafold.ebi.ac.uk/files/AF-{params.uniprot_id}-F1-model_v4.pdb
         """
 
+rule align_structures:
+    input:
+        "alpha_synuclein.pdb",
+        "pdb/{uniprot_id}.pdb"
+    output:
+        "aligned/{uniprot_id}_aligned.pdb"
+    params:
+        uniprot_id="{uniprot_id}"
+    shell:
+        """
+        pymol -c -d "load alpha_synuclein.pdb; load pdb/{params.uniprot_id}.pdb; align alpha_synuclein, {params.uniprot_id}; save aligned/{params.uniprot_id}_aligned.pdb; quit"
+        """
+
 rule run_rosetta_docking:
     input:
-        "alpha_synuclein.pdb" ,
-        "pdb/{uniprot_id}.pdb"
+        "aligned/{uniprot_id}_aligned.pdb"
     output:
         "output/{uniprot_id}_docked.pdb"
     params:
         uniprot_id="{uniprot_id}"
     shell:
         """
-        /zata/zippy/hattonc/rosetta/source/bin/docking_protocol.default.linuxgccrelease -s {input[0]} -s {input[1]} \
+        /zata/zippy/hattonc/rosetta/source/bin/docking_protocol.default.linuxgccrelease \
+        -s {input[0]} -s alpha_synuclein.pdb \
         -nstruct 10 -ex1 -ex2aro \
-        -relax:constrain_relax_to_start_coords \
-        -relax:coord_constrain_sidechains \
         -out:path:all output/ \
+        -use_input_sc \
         -randomize1 -randomize2 \
-        -use_input_sc 
+        -relax:constrain_relax_to_start_coords \
+        -relax:coord_constrain_sidechains
         """
+
 rule cleanup_pdb: 
     input:
         "output/{uniprot_id}_docked.pdb"
     shell:
         "rm pdb/{wildcards.uniprot_id}.pdb"
+

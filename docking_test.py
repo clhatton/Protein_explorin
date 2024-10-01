@@ -45,9 +45,6 @@ rule run_rosetta_docking:
         -nstruct 10 -ex1 -ex2aro \
         -out:path:all output/ \
         -use_input_sc \
-        -randomize1 -randomize2 \
-        -relax:constrain_relax_to_start_coords \
-        -relax:coord_constrain_sidechains
         """
 
 rule cleanup_pdb: 

@@ -10,7 +10,7 @@ rule all:
 
 rule download_alphafold_pdb:
     output:
-        "pdb/{uniprot_id}.pdb"
+        "{uniprot_id}.pdb"
     params:
         uniprot_id="{uniprot_id}"
     shell:
@@ -20,7 +20,7 @@ rule download_alphafold_pdb:
 
 rule run_rosetta_docking:
     input:
-        "pdb/{uniprot_id}.pdb",
+        "{uniprot_id}.pdb",
         "c_term_tail.pdb"  
     output:
         "output/{uniprot_id}_docked.pdb"
@@ -37,4 +37,4 @@ rule cleanup_pdb:
     input:
         "output/{uniprot_id}_docked.pdb"
     shell:
-        "rm pdb/{wildcards.uniprot_id}.pdb"
+        "rm {wildcards.uniprot_id}.pdb"

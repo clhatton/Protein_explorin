@@ -30,10 +30,7 @@ rule run_rosetta_docking:
         """
         /zata/zippy/hattonc/rosetta/source/bin/docking_protocol.default.linuxgccrelease -s {input[0]} -s {input[1]} \
         -nstruct 10 \
-        -out:path:all output/ \
-        -docking:no_auto_setup \
-        -ignore_unrecognized_res \
-        -missing_density_to_jump
+        -out:path:all output/ 
         """
 rule cleanup_pdb: 
     input:

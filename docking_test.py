@@ -28,7 +28,7 @@ rule run_rosetta_docking:
         uniprot_id="{uniprot_id}"
     shell:
         """
-        /zata/zippy/hattonc/rosetta/source/bin/docking_protocol.default.linuxgccrelease -s {input[0]} -s {input[1]} \
+        /zata/zippy/hattonc/rosetta/source/bin/docking_protocol.default.linuxgccrelease -s {input[0]} \
         -nstruct 10 \
         -out:path:all output/ \
         -ex1 -ex2aro \

@@ -28,9 +28,8 @@ rule run_rosetta_docking:
         uniprot_id="{uniprot_id}"
     shell:
         """
-        /zata/zippy/hattonc/rosetta/source/bin/FlexPepDocking.default.linuxgccrelease -s {input[0]} \
-        -nstruct 100 \
-        -pep_refine \
+        /zata/zippy/hattonc/rosetta/source/bin/docking_protocol.default.linuxgccrelease -s {input[0]} -s {input[1]} \
+        -nstruct 10 \
         -out:path:all output/ \
         -ex1 -ex2aro \
         -use_input_sc 

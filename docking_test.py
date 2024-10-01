@@ -9,18 +9,20 @@ rule all:
         expand("output/{uniprot_id}_docked.pdb", uniprot_id=uniprot_ids)
 
 rule download_alphafold_pdb:
+    input:
+        "pdb/{uniprot_id}.pdb"
     output:
-        "{uniprot_id}.pdb"
+        "pdb/{uniprot_id}.pdb"
     params:
         uniprot_id="{uniprot_id}"
     shell:
         """
-        curl -o {output} https://alphafold.ebi.ac.uk/files/AF-{params.uniprot_id}-F1-model_v4.pdb
+        curl -L -o {output} https://alphafold.ebi.ac.uk/files/AF-{params.uniprot_id}-F1-model_v4.pdb
         """
 
 rule run_rosetta_docking:
     input:
-        "{uniprot_id}.pdb",
+        "pdb/{uniprot_id}.pdb",
         "c_term_tail.pdb"  
     output:
         "output/{uniprot_id}_docked.pdb"
@@ -37,4 +39,4 @@ rule cleanup_pdb:
     input:
         "output/{uniprot_id}_docked.pdb"
     shell:
-        "rm {wildcards.uniprot_id}.pdb"
+        "rm pdb/{wildcards.uniprot_id}.pdb"
